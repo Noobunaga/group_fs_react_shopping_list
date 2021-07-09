@@ -54,7 +54,7 @@ function App() {
         .catch( err => {
             console.log('Error purchasing (put) item', err);
         });
-
+    }
     // DELETE the database contents
 
     const deleteTable = () => {
