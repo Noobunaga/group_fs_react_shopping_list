@@ -1,5 +1,5 @@
 import react from 'react';
-import ShoppingItem from './ShoppingItem/ShoppingItem';
+import ShoppingItem from '../ShoppingItem/ShoppingItem';
 
 function ShoppingList(props){
     return (

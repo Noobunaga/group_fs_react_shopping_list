@@ -1,5 +1,5 @@
 import react from 'react';
-import './ShoppingItem.css';
+import '../ShoppingItem/ShoppingItem.css';
 
 function ShoppingItem({item}){
     return (
