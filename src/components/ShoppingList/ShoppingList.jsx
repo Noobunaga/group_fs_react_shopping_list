@@ -3,6 +3,7 @@ import ShoppingItem from '../ShoppingItem/ShoppingItem';
 import './ShoppingList.css';
 
 function ShoppingList(props){
+    console.log(props);
 
     return (
         <>
@@ -23,7 +24,7 @@ function ShoppingList(props){
                     </thead>
                     <tbody>
                     {props.list.map(item => 
-                        <ShoppingItem key={item.id} item={item} itemPurchased={props.itemPurchased} />
+                        <ShoppingItem key={item.id} item={item} removeItem={props.removeItem} itemPurchased={props.itemPurchased} />
                         )}
                     </tbody>
                 </table>

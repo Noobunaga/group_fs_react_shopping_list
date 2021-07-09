@@ -42,11 +42,11 @@ function App() {
             });
     }
 
-
+    // DELETE an item from the table
     const removeItem = (itemId) => {
         axios({
             method: 'DELETE',
-            url: '/list/delete/${itemId}',
+            url: `/list/delete/${itemId}`
           })
           .then(response => {
             console.log('Successfully removed');
@@ -62,7 +62,7 @@ function App() {
     const itemPurchased = (itemId) => {
         axios({
             method:'PUT',
-            url:`/list/update/${itemId}`,
+            url:`/list/update/${itemId}`
         })
         .then( response => {
             getList();
@@ -115,13 +115,13 @@ function App() {
             <main>
                 <h1>Add an Item:</h1>
                 {/* Inputs */}
-                <InputForm addItem={addItem} removeItem={removeItem}/>
+                <InputForm addItem={addItem}/>
                 <ShoppingList 
-                  list={shoppingList} 
-                  removeItem={removeItem} 
+                  list={shoppingList}
                   resetPurchased={resetPurchased} 
                   itemPurchased={itemPurchased} 
                   deleteTable={deleteTable}
+                  removeItem={removeItem}
                 />
             </main>
         </div>

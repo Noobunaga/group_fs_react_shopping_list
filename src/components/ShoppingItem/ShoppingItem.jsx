@@ -2,6 +2,10 @@ import react from 'react';
 import '../ShoppingItem/ShoppingItem.css';
 
 function ShoppingItem(props){
+
+    const logThis = () => {
+        console.log('This');
+    }
     return ( (!props.item.purchased) ? (
 
             <tr>
@@ -9,7 +13,7 @@ function ShoppingItem(props){
                 <td>{props.item.quantity}</td> 
                 <td>{props.item.unit}</td> 
                 <td className="purchaseCell"><button onClick={() => props.itemPurchased(props.item.id)} >Buy</button></td>
-                <td className="deleteCell removeButton" onClick={() => props.removeItem(props.item.id)}><button className="removeButton">Remove</button></td>
+                <td className="deleteCell"><button onClick={() => props.removeItem(props.item.id)}>Remove</button></td>
             </tr>
         ) : (
             <tr className="purchased">
