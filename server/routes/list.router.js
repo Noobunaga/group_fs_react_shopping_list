@@ -80,4 +80,26 @@ router.delete('/:id', (req, res) => {
         });
 });
 
+//DELETE - Clear: Delete all contents from table
+
+router.delete('/clear', (req, res) => {
+    console.log('Request URL: ', req.url);
+    console.log('Request route parameters: ', req.params);
+
+    // creates string to delete task
+    const sqlText = `
+    DELETE FROM shopping_list
+    `;
+
+    pool.query(sqlText)
+        .then(dbResponse => {
+            console.log('How many rows deleted:', dbResponse.rowsCount);
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log(`ERROR! Unable to delete table contents. Error: ${error}`);
+            res.sendStatus(500);
+        });
+});
+
 module.exports = router;
