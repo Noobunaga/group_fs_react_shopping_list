@@ -3,15 +3,22 @@ import '../ShoppingItem/ShoppingItem.css';
 
 function ShoppingItem(props){
     return ( (!props.item.purchased) ? (
-        <li>
-            {props.item.name} {props.item.quantity} {props.item.unit} {props.item.purchased}
-            <button onClick={() => props.itemPurchased(props.item.id)} >Buy</button>
-            <button className="removeButton" onClick={() => props.removeItem(props.item.id)} >Remove</button>
-        </li>
+
+            <tr>
+                <td>{props.item.name}</td>
+                <td>{props.item.quantity}</td> 
+                <td>{props.item.unit}</td> 
+                <td className="purchaseCell"><button onClick={() => props.itemPurchased(props.item.id)} >Buy</button></td>
+                <td className="deleteCell removeButton" onClick={() => props.removeItem(props.item.id)}><button className="removeButton">Remove</button></td>
+            </tr>
         ) : (
-        <li>
-            {props.item.name} {props.item.quantity} {props.item.unit} {props.item.purchased}
-        </li>
+            <tr className="purchased">
+                <td>{props.item.name}</td>
+                <td>{props.item.quantity}</td> 
+                <td>{props.item.unit}</td> 
+                <td className="purchaseCell">√</td>
+                <td className="deleteCell"></td>
+            </tr>
         )
     )
 }
