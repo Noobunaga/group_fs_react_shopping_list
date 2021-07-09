@@ -8,9 +8,9 @@ CREATE TABLE shopping_list (
     "quantity" DECIMAL(p,s),
     "unit" varchar(20),
     "purchased" boolean default 'false'
-)
+);
 
-INSERT INTO shopping_list ("name", "quantity", "unit", "purchased")
+INSERT INTO shopping_list ("name", "quantity", "unit")
 VALUES ('milk', '1', 'gallon'),
 ('eggs', '1', 'dozen'),
 ('beef', '1', 'pound');
