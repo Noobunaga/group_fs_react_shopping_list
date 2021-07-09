@@ -1,8 +1,8 @@
 TODO List:
-    [] Form - Inputs
-        [] Name
-        [] Quantity
-        [] Unit
+    [x] Form - Inputs
+        [x] Name
+        [x] Quantity
+        [x] Unit
     [] Display existing items on page load
     [] Remove button
     [] Purchase item button

@@ -1,11 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 
-import ShoppingList from '../ShoppingList/ShoppingList.jsx';
+import { useState } from 'react';
+
 import Header from '../Header/Header.jsx';
 import './App.css';
 // Components go here
-import InputForm from '../InputForm/InputForm.jsx'
+import InputForm from '../InputForm/InputForm.jsx';
+import ShoppingList from '../ShoppingList/ShoppingList.jsx';
 
 
 function App() {
