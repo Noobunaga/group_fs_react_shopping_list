@@ -39,5 +39,45 @@ router.post('/', (req, res) => {
         })
 })
 
+//PUT to update purchased status
+
+router.put('/:id', (req, res) => {
+    const itemId = req.params.id;
+    let sqlText = `UPDATE "shopping_list" SET "purchased"='true' WHERE id=$1;`;
+
+    pool.query(sqlText, [itemId])
+    .then(dbResponse => {
+        console.log('Updated Item Purchased Status:', dbResponse.rowCount);
+        res.sendStatus(202);
+    })
+    .catch(error => {
+        console.log('There was an error updating the table', error);
+        res.sendStatus(500);
+    });
+})
+
+//DELETE - DELETE: Delete a task from the to do list
+
+router.delete('/:id', (req, res) => {
+    console.log('Request URL: ', req.url);
+    console.log('Request route parameters: ', req.params);
+    const itemId = req.params.id;
+    console.log(`Item ID is: ${itemId}`);
+
+    // creates string to delete task
+    const sqlText = `
+    DELETE FROM shopping_list WHERE id = $1
+    `;
+
+    pool.query(sqlText, [itemId])
+        .then(dbResponse => {
+            console.log('How many rows deleted:', dbResponse.rowsCount);
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log(`ERROR! Unable to delete Item with id ${itemId}. Error: ${error}`);
+            res.sendStatus(500);
+        });
+});
 
 module.exports = router;
