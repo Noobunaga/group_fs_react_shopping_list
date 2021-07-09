@@ -116,8 +116,6 @@ function App() {
                 <h1>Add an Item:</h1>
                 {/* Inputs */}
                 <InputForm addItem={addItem} removeItem={removeItem}/>
-
-                <ShoppingList list={shoppingList}  />
                 <ShoppingList 
                   list={shoppingList} 
                   removeItem={removeItem} 
