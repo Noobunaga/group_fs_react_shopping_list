@@ -9,7 +9,7 @@ function ShoppingList(props){
                 <button id="clearButton">Clear</button>
                 <ul>
                     {props.list.map(item => 
-                        <ShoppingItem key={item.id} name={item.name} quantity={item.quantity} unit={item.unit} />
+                        <ShoppingItem item={item} />
                         )}
                 </ul>
         </>

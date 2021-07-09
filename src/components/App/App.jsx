@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
 import { useState } from 'react';
@@ -41,6 +41,10 @@ function App() {
                 console.log('Error when posting new Item. Error:', error);
             });
     }
+   
+    useEffect( ()=>{
+        getList();
+    }, []);
 
     return (
         <div className="App">
