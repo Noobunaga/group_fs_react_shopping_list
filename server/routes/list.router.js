@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     // When you fetch all things in these GET routes, strongly encourage ORDER BY
     // so that things always come back in a consistent order
     //create variable to hold SQL query 
-    const sqlText = `SELECT * FROM shopping_list ORDER BY id DESC;`;
+    const sqlText = `SELECT * FROM shopping_list ORDER BY  purchased ASC, id ASC;`;
     pool.query(sqlText)
         .then((result) => {
             console.log(`Got stuff back from the database`, result);
