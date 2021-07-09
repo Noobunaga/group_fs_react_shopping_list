@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function InputForm() {
+function InputForm({addItem}) {
 
     const [ itemName, setItemName ] = useState('');
     const [ itemQuantity, setItemQuantity] = useState('');
@@ -26,7 +26,7 @@ function InputForm() {
         console.log(newItem);
 
         // pass object into function to POST item to database
-            // TODO:
+            addItem(newItem);
 
         // Clear form inputs
         setItemName('');
