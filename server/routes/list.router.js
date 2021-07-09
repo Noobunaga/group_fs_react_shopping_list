@@ -37,11 +37,11 @@ router.post('/', (req, res) => {
             console.log(`Error making database query ${sqlText}`, error);
             res.sendStatus(500); // Good server always responds
         })
-})
+});
 
 //PUT to update purchased status
 
-router.put('/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
     const itemId = req.params.id;
     let sqlText = `UPDATE "shopping_list" SET "purchased"='true' WHERE id=$1;`;
 
@@ -55,6 +55,23 @@ router.put('/:id', (req, res) => {
         res.sendStatus(500);
     });
 })
+
+// PUT to reset purchased status of all items to FALSE
+
+router.put('/reset', (req, res) => {
+    let sqlText = `UPDATE shopping_list SET "purchased"='false';`;
+
+
+    pool.query(sqlText)
+        .then(dbResponse => {
+            console.log('Purchased status of all items set to false.', dbResponse.rowCount);
+            res.sendStatus(202);
+        })
+        .catch(error => {
+            console.log('Error resetting purchase status. Error:', error);
+            res.sendStatus(500);
+        });
+});
 
 //DELETE - DELETE: Delete a task from the to do list
 
@@ -76,6 +93,28 @@ router.delete('/delete/:id', (req, res) => {
         })
         .catch(error => {
             console.log(`ERROR! Unable to delete Item with id ${itemId}. Error: ${error}`);
+            res.sendStatus(500);
+        });
+});
+
+//DELETE - Clear: Delete all contents from table
+
+router.delete('/clear', (req, res) => {
+    console.log('Request URL: ', req.url);
+    console.log('Request route parameters: ', req.params);
+
+    // creates string to delete task
+    const sqlText = `
+    DELETE FROM shopping_list
+    `;
+
+    pool.query(sqlText)
+        .then(dbResponse => {
+            console.log('How many rows deleted:', dbResponse.rowsCount);
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log(`ERROR! Unable to delete table contents. Error: ${error}`);
             res.sendStatus(500);
         });
 });

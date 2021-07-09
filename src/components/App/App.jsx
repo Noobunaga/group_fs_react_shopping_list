@@ -42,6 +42,7 @@ function App() {
             });
     }
 
+
     const removeItem = (itemId) => {
         axios({
             method: 'DELETE',
@@ -56,7 +57,54 @@ function App() {
             console.log(err);
           });
       }
+
+// PUT to change purchased to true
+    const itemPurchased = (itemId) => {
+        axios({
+            method:'PUT',
+            url:`/list/update/${itemId}`,
+        })
+        .then( response => {
+            getList();
+        })
+        .catch( err => {
+            console.log('Error purchasing (put) item', err);
+        });
+    }
+    // DELETE the database contents
+
+    const deleteTable = () => {
+        axios({
+            method: 'DELETE',
+            url: '/list/clear',
+            data: {}
+            })
+            .then( dbResponse => {
+                console.log('Table successfully cleared:', dbResponse);
+                getList();
+            })
+            .catch(error => {
+                console.log('Error when clearing. Error:', error);
+            });
+
+    }
    
+    // PUT request to reset all purchased values to false
+    const resetPurchased = () => {
+        axios({
+            method: 'PUT',
+            url: '/list/reset',
+            data: {}
+        })
+            .then(dbResponse => {
+                console.log('Successfully reset the purchase status of all items', dbResponse);
+                getList();
+            })
+            .catch(error => {
+                console.log('Error updating all purchase statuses:', error);
+            });
+    }
+
     useEffect( ()=>{
         getList();
     }, []);
@@ -67,10 +115,16 @@ function App() {
             <main>
                 <h1>Add an Item:</h1>
                 {/* Inputs */}
-                <InputForm addItem={addItem}/>
-                <InputForm removeItem={removeItem}/>
-                <p>Under Construction...</p>
-                <ShoppingList list={shoppingList} removeItem={removeItem} />
+                <InputForm addItem={addItem} removeItem={removeItem}/>
+
+                <ShoppingList list={shoppingList}  />
+                <ShoppingList 
+                  list={shoppingList} 
+                  removeItem={removeItem} 
+                  resetPurchased={resetPurchased} 
+                  itemPurchased={itemPurchased} 
+                  deleteTable={deleteTable}
+                />
             </main>
         </div>
     );
