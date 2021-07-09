@@ -4,6 +4,8 @@ import axios from 'axios';
 import ShoppingList from '../ShoppingList/ShoppingList.jsx';
 import Header from '../Header/Header.jsx';
 import './App.css';
+// Components go here
+import InputForm from '../InputForm/InputForm.jsx'
 
 
 function App() {
@@ -27,8 +29,9 @@ function App() {
         <div className="App">
             <Header />
             <main>
-                <h1>Add an Item:</h1>
-                {/* Inputs */}
+
+                <InputForm />
+                <p>Under Construction...</p>
                 <ShoppingList list={shoppingList} />
             </main>
         </div>
