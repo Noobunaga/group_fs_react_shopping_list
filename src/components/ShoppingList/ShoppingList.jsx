@@ -10,7 +10,7 @@ function ShoppingList(props){
                 <button onClick={props.deleteTable} id="clearButton">Clear</button>
                 <ul>
                     {props.list.map(item => 
-                        <ShoppingItem item={item} />
+                        <ShoppingItem item={item} itemPurchased={props.itemPurchased} />
                         )}
                 </ul>
         </>

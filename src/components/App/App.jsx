@@ -42,6 +42,19 @@ function App() {
             });
     }
 
+
+    const itemPurchased = (itemId) => {
+        axios({
+            method:'PUT',
+            url:`/list/${itemId}`,
+        })
+        .then( response => {
+            getList();
+        })
+        .catch( err => {
+            console.log('Error purchasing (put) item', err);
+        });
+
     // DELETE the database contents
 
     const deleteTable = () => {
@@ -57,6 +70,7 @@ function App() {
             .catch(error => {
                 console.log('Error when clearing. Error:', error);
             });
+
     }
    
     useEffect( ()=>{
@@ -70,8 +84,8 @@ function App() {
                 <h1>Add an Item:</h1>
                 {/* Inputs */}
                 <InputForm addItem={addItem}/>
-                <p>Under Construction...</p>
-                <ShoppingList list={shoppingList} deleteTable={deleteTable}/>
+                <ShoppingList list={shoppingList} itemPurchased={itemPurchased} deleteTable={deleteTable}/>
+
             </main>
         </div>
     );
