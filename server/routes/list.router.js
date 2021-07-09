@@ -58,7 +58,7 @@ router.put('/:id', (req, res) => {
 
 //DELETE - DELETE: Delete a task from the to do list
 
-router.delete('/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     console.log('Request URL: ', req.url);
     console.log('Request route parameters: ', req.params);
     const itemId = req.params.id;
@@ -76,6 +76,28 @@ router.delete('/:id', (req, res) => {
         })
         .catch(error => {
             console.log(`ERROR! Unable to delete Item with id ${itemId}. Error: ${error}`);
+            res.sendStatus(500);
+        });
+});
+
+//DELETE - Clear: Delete all contents from table
+
+router.delete('/clear', (req, res) => {
+    console.log('Request URL: ', req.url);
+    console.log('Request route parameters: ', req.params);
+
+    // creates string to delete task
+    const sqlText = `
+    DELETE FROM shopping_list
+    `;
+
+    pool.query(sqlText)
+        .then(dbResponse => {
+            console.log('How many rows deleted:', dbResponse.rowsCount);
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log(`ERROR! Unable to delete table contents. Error: ${error}`);
             res.sendStatus(500);
         });
 });

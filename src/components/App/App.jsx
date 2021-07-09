@@ -41,6 +41,23 @@ function App() {
                 console.log('Error when posting new Item. Error:', error);
             });
     }
+
+    // DELETE the database contents
+
+    const deleteTable = () => {
+        axios({
+            method: 'DELETE',
+            url: '/list/clear',
+            data: {}
+            })
+            .then( dbResponse => {
+                console.log('Table successfully cleared:', dbResponse);
+                getList();
+            })
+            .catch(error => {
+                console.log('Error when clearing. Error:', error);
+            });
+    }
    
     useEffect( ()=>{
         getList();
@@ -54,7 +71,7 @@ function App() {
                 {/* Inputs */}
                 <InputForm addItem={addItem}/>
                 <p>Under Construction...</p>
-                <ShoppingList list={shoppingList} />
+                <ShoppingList list={shoppingList} deleteTable={deleteTable}/>
             </main>
         </div>
     );
