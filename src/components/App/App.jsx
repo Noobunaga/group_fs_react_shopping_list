@@ -42,6 +42,22 @@ function App() {
             });
     }
 
+
+    const removeItem = (itemId) => {
+        axios({
+            method: 'DELETE',
+            url: '/list/delete/${itemId}',
+          })
+          .then(response => {
+            console.log('Successfully removed');
+            getList();
+          })
+          .catch(err => {
+            alert('Error removing Item');
+            console.log(err);
+          });
+      }
+
 // PUT to change purchased to true
     const itemPurchased = (itemId) => {
         axios({
@@ -99,10 +115,16 @@ function App() {
             <main>
                 <h1>Add an Item:</h1>
                 {/* Inputs */}
-                <InputForm addItem={addItem}/>
+                <InputForm addItem={addItem} removeItem={removeItem}/>
 
-                <ShoppingList list={shoppingList} resetPurchased={resetPurchased} itemPurchased={itemPurchased} deleteTable={deleteTable}/>
-
+                <ShoppingList list={shoppingList}  />
+                <ShoppingList 
+                  list={shoppingList} 
+                  removeItem={removeItem} 
+                  resetPurchased={resetPurchased} 
+                  itemPurchased={itemPurchased} 
+                  deleteTable={deleteTable}
+                />
             </main>
         </div>
     );
