@@ -37,11 +37,11 @@ router.post('/', (req, res) => {
             console.log(`Error making database query ${sqlText}`, error);
             res.sendStatus(500); // Good server always responds
         })
-})
+});
 
 //PUT to update purchased status
 
-router.put('/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
     const itemId = req.params.id;
     let sqlText = `UPDATE "shopping_list" SET "purchased"='true' WHERE id=$1;`;
 
@@ -56,7 +56,25 @@ router.put('/:id', (req, res) => {
     });
 })
 
+// PUT to reset purchased status of all items to FALSE
+
+router.put('/reset', (req, res) => {
+    let sqlText = `UPDATE shopping_list SET "purchased"='false';`;
+
+
+    pool.query(sqlText)
+        .then(dbResponse => {
+            console.log('Purchased status of all items set to false.', dbResponse.rowCount);
+            res.sendStatus(202);
+        })
+        .catch(error => {
+            console.log('Error resetting purchase status. Error:', error);
+            res.sendStatus(500);
+        });
+});
+
 //DELETE - DELETE: Delete a task from the to do list
+
 
 router.delete('/delete/:id', (req, res) => {
     console.log('Request URL: ', req.url);
