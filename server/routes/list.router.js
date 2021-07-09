@@ -69,7 +69,7 @@ router.delete('/:id', (req, res) => {
     DELETE FROM shopping_list WHERE id = $1
     `;
 
-    pool.query(sqlText, [taskId])
+    pool.query(sqlText, [itemId])
         .then(dbResponse => {
             console.log('How many rows deleted:', dbResponse.rowsCount);
             res.sendStatus(200);
