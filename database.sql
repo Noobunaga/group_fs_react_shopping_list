@@ -9,3 +9,7 @@ CREATE TABLE shopping_list (
     "purchased" boolean default 'false'
 )
 
+INSERT INTO shopping_list ("name", "quantity", "unit", "purchased")
+VALUES ('milk', '1', 'gallon'),
+('eggs', '1', 'dozen'),
+('beef', '1', 'pound');
