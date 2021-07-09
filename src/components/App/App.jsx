@@ -42,6 +42,22 @@ function App() {
             });
     }
    
+    // PUT request to reset all purchased values to false
+    const resetPurchased = () => {
+        axios({
+            method: 'PUT',
+            url: '/list/reset',
+            data: {}
+        })
+            .then(dbResponse => {
+                console.log('Successfully reset the purchase status of all items', dbResponse);
+                getList();
+            })
+            .catch(error => {
+                console.log('Error updating all purchase statuses:', error);
+            });
+    }
+
     useEffect( ()=>{
         getList();
     }, []);
@@ -54,7 +70,7 @@ function App() {
                 {/* Inputs */}
                 <InputForm addItem={addItem}/>
                 <p>Under Construction...</p>
-                <ShoppingList list={shoppingList} />
+                <ShoppingList list={shoppingList} resetPurchased={resetPurchased}/>
             </main>
         </div>
     );
