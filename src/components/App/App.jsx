@@ -41,6 +41,37 @@ function App() {
                 console.log('Error when posting new Item. Error:', error);
             });
     }
+
+
+    const itemPurchased = (itemId) => {
+        axios({
+            method:'PUT',
+            url:`/list/${itemId}`,
+        })
+        .then( response => {
+            getList();
+        })
+        .catch( err => {
+            console.log('Error purchasing (put) item', err);
+        });
+    }
+    // DELETE the database contents
+
+    const deleteTable = () => {
+        axios({
+            method: 'DELETE',
+            url: '/list/clear',
+            data: {}
+            })
+            .then( dbResponse => {
+                console.log('Table successfully cleared:', dbResponse);
+                getList();
+            })
+            .catch(error => {
+                console.log('Error when clearing. Error:', error);
+            });
+
+    }
    
     // PUT request to reset all purchased values to false
     const resetPurchased = () => {
@@ -69,8 +100,9 @@ function App() {
                 <h1>Add an Item:</h1>
                 {/* Inputs */}
                 <InputForm addItem={addItem}/>
-                <p>Under Construction...</p>
-                <ShoppingList list={shoppingList} resetPurchased={resetPurchased}/>
+
+                <ShoppingList list={shoppingList} resetPurchased={resetPurchased} itemPurchased={itemPurchased} deleteTable={deleteTable}/>
+
             </main>
         </div>
     );
