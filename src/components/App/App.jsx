@@ -42,11 +42,11 @@ function App() {
             });
     }
 
-
+// PUT to change purchased to true
     const itemPurchased = (itemId) => {
         axios({
             method:'PUT',
-            url:`/list/${itemId}`,
+            url:`/list/update/${itemId}`,
         })
         .then( response => {
             getList();
