@@ -41,6 +41,19 @@ function App() {
                 console.log('Error when posting new Item. Error:', error);
             });
     }
+
+    const itemPurchased = (itemId) => {
+        axios({
+            method:'PUT',
+            url:`/list/${itemId}`,
+        })
+        .then( response => {
+            getList();
+        })
+        .catch( err => {
+            console.log('Error purchasing (put) item', err);
+        });
+    }
    
     useEffect( ()=>{
         getList();
@@ -54,7 +67,7 @@ function App() {
                 {/* Inputs */}
                 <InputForm addItem={addItem}/>
                 <p>Under Construction...</p>
-                <ShoppingList list={shoppingList} />
+                <ShoppingList list={shoppingList} itemPurchased={itemPurchased} />
             </main>
         </div>
     );

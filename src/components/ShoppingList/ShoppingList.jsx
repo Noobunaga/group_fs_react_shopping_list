@@ -9,7 +9,7 @@ function ShoppingList(props){
                 <button id="clearButton">Clear</button>
                 <ul>
                     {props.list.map(item => 
-                        <ShoppingItem item={item} />
+                        <ShoppingItem item={item} itemPurchased={props.itemPurchased} />
                         )}
                 </ul>
         </>

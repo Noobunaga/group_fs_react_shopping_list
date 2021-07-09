@@ -1,11 +1,11 @@
 import react from 'react';
 import '../ShoppingItem/ShoppingItem.css';
 
-function ShoppingItem({item}){
+function ShoppingItem(props){
     return (
         <li>
-            {item.name} {item.quantity} {item.unit}
-            <button class="purchaseButton">Buy</button>
+            {props.item.name} {props.item.quantity} {props.item.unit}
+            <button onClick={() => props.itemPurchased(props.item.id)} >Buy</button>
             <button class="removeButton">Remove</button>
         </li>
     )
