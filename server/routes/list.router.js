@@ -75,7 +75,6 @@ router.put('/reset', (req, res) => {
 
 //DELETE - DELETE: Delete a task from the to do list
 
-
 router.delete('/delete/:id', (req, res) => {
     console.log('Request URL: ', req.url);
     console.log('Request route parameters: ', req.params);
