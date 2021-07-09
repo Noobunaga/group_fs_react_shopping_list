@@ -1,5 +1,6 @@
 import react from 'react';
 import ShoppingItem from '../ShoppingItem/ShoppingItem';
+import './ShoppingList.css';
 
 function ShoppingList(props){
 
@@ -10,11 +11,22 @@ function ShoppingList(props){
                 <button onClick={props.resetPurchased} id="resetButton">Reset</button>
                 <button onClick={props.deleteTable} id="clearButton">Clear</button>
 
-                <ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Unit</th>
+                            <th>√</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {props.list.map(item => 
-                        <ShoppingItem item={item} itemPurchased={props.itemPurchased} />
+                        <ShoppingItem key={item.id} item={item} itemPurchased={props.itemPurchased} />
                         )}
-                </ul>
+                    </tbody>
+                </table>
         </>
     )
 }
