@@ -41,6 +41,21 @@ function App() {
                 console.log('Error when posting new Item. Error:', error);
             });
     }
+
+    const removeItem = (itemId) => {
+        axios({
+            method: 'DELETE',
+            url: '/list/delete/${itemId}',
+          })
+          .then(response => {
+            console.log('Successfully removed');
+            getList();
+          })
+          .catch(err => {
+            alert('Error removing Item');
+            console.log(err);
+          });
+      }
    
     useEffect( ()=>{
         getList();
@@ -53,8 +68,9 @@ function App() {
                 <h1>Add an Item:</h1>
                 {/* Inputs */}
                 <InputForm addItem={addItem}/>
+                <InputForm removeItem={removeItem}/>
                 <p>Under Construction...</p>
-                <ShoppingList list={shoppingList} />
+                <ShoppingList list={shoppingList} removeItem={removeItem} />
             </main>
         </div>
     );
