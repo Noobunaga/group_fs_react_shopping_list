@@ -26,10 +26,25 @@ function App() {
         });
     }
 
+    // POST a new item to the database
+    const addItem = (newItemObject) => {
+        axios({
+            method: 'POST',
+            url: '/list',
+            data: newItemObject
+            })
+            .then( dbResponse => {
+                console.log('New Item successfully added:', dbResponse);
+                getList();
+            })
+            .catch(error => {
+                console.log('Error when posting new Item. Error:', error);
+            });
+    }
+   
     useEffect( ()=>{
         getList();
     }, []);
-
 
     return (
         <div className="App">
@@ -37,7 +52,7 @@ function App() {
             <main>
                 <h1>Add an Item:</h1>
                 {/* Inputs */}
-                <InputForm />
+                <InputForm addItem={addItem}/>
                 <p>Under Construction...</p>
                 <ShoppingList list={shoppingList} />
             </main>
